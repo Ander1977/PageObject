@@ -43,6 +43,17 @@ public class MoneyTransferTest {
     }
 
     @Test
+    public void shouldTransferFromCard1ToCard2() {
+        PersonalArea page = openPersonalArea();
+        page.updateBalance();
+        int currentBalance = page.getBalance("0001");
+        int expected = currentBalance + 9000;
+        page.moneyTransfer("0001", cardNunber0002, 9000);
+        page.updateBalance();
+        assertEquals(expected, page.getBalance("0001"));
+    }
+
+    @Test
     public void shouldTransferMoreThanBalance() {
         PersonalArea page = openPersonalArea();
         page.updateBalance();
