@@ -38,6 +38,7 @@ public class MoneyTransferTest {
         int currentBalance = page.getBalance("0002");
         int expected = currentBalance + 4000;
         page.moneyTransfer("0002", cardNunber0001, 4000);
+        page.moneyTransfer("0001", cardNunber0002, - 4000);
         page.updateBalance();
         assertEquals(expected, page.getBalance("0002"));
     }
@@ -49,6 +50,7 @@ public class MoneyTransferTest {
         int currentBalance = page.getBalance("0001");
         int expected = currentBalance + 9000;
         page.moneyTransfer("0001", cardNunber0002, 9000);
+        page.moneyTransfer("0002", cardNunber0001, - 9000);
         page.updateBalance();
         assertEquals(expected, page.getBalance("0001"));
     }
@@ -58,7 +60,7 @@ public class MoneyTransferTest {
         PersonalArea page = openPersonalArea();
         page.updateBalance();
         int currentBalance = page.getBalance("0002");
-        int expected = currentBalance + 500000;
+        int expected = currentBalance;
         page.moneyTransfer("0002", cardNunber0001, 500000);
         page.updateBalance();
         assertEquals(expected, page.getBalance("0002"));
