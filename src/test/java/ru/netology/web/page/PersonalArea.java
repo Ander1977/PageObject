@@ -23,6 +23,7 @@ public class PersonalArea {
     public PersonalArea() {
         heading.waitUntil(Condition.visible, 15000);
     }
+
     private void openTransferForm(String lastFourDigit) {
         cardList.findBy(Condition.text(lastFourDigit)).$(withText("Пополнить")).click();
         $(withText("Пополнение карты")).shouldBe(visible);

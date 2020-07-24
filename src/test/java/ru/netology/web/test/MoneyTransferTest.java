@@ -35,24 +35,28 @@ public class MoneyTransferTest {
     public void shouldTransferFromCard2ToCard1() {
         PersonalArea page = openPersonalArea();
         page.updateBalance();
-        int currentBalance = page.getBalance("0002");
-        int expected = currentBalance + 4000;
+        int currentBalance0001 = page.getBalance("0001");
+        int currentBalance0002 = page.getBalance("0002");
+        int expected0001 = currentBalance0001 + 4000;
+        int expected0002 = currentBalance0002 - 4000;
         page.moneyTransfer("0002", cardNunber0001, 4000);
-        page.moneyTransfer("0001", cardNunber0002, - 4000);
         page.updateBalance();
-        assertEquals(expected, page.getBalance("0002"));
+        assertEquals(expected0002, page.getBalance("0002"));
+        assertEquals(expected0001, page.getBalance("0001"));
     }
 
     @Test
     public void shouldTransferFromCard1ToCard2() {
         PersonalArea page = openPersonalArea();
         page.updateBalance();
-        int currentBalance = page.getBalance("0001");
-        int expected = currentBalance + 9000;
-        page.moneyTransfer("0001", cardNunber0002, 9000);
-        page.moneyTransfer("0002", cardNunber0001, - 9000);
+        int currentBalance0001 = page.getBalance("0001");
+        int currentBalance0002 = page.getBalance("0002");
+        int expected0001 = currentBalance0001 - 5000;
+        int expected0002 = currentBalance0002 + 5000;
+        page.moneyTransfer("0001", cardNunber0002, 5000);
         page.updateBalance();
-        assertEquals(expected, page.getBalance("0001"));
+        assertEquals(expected0001, page.getBalance("0001"));
+        assertEquals(expected0002, page.getBalance("0002"));
     }
 
     @Test
@@ -64,5 +68,7 @@ public class MoneyTransferTest {
         page.moneyTransfer("0002", cardNunber0001, 500000);
         page.updateBalance();
         assertEquals(expected, page.getBalance("0002"));
+
     }
 }
+
